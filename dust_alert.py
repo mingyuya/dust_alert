@@ -1,7 +1,7 @@
-## mingyulovesunmin ##
-######################
-## dust_alert
-######################
+"""
+ Name 			: dust_alert
+ Description	: get the nearest station  
+"""
 import pdairp
 
 
@@ -50,16 +50,20 @@ def get_grade_pm25 (pm25_val):
 	else:
 		return 4
 
+## ---- main ---- ##
+#get_near_station()
+
+# Initialize the instance of PollutionData
 pollution_dat = pdairp.PollutionData("gDbrBn8llIWjtyxuBOsXeV%2BZepaHh4hvBDAlxypLZaD%2FFavczDV69j9UJ0OvL%2FEKFGUa3TI6KuUjxEQ8wR8Stw%3D%3D")
-## debug
-#-print (pollution_dat.station("영등포로", "DAILY", page_no='1', num_of_rows='2', ver='1.2')['0']) ## '0' : latest data
-##pm25_val = int(pollution_dat.station("영등포로", "DAILY", page_no='1', num_of_rows='2', ver='1.2')['0']['pm25Value']) ## '0' : latest data
-##pm10_val = int(pollution_dat.station("영등포로", "DAILY", page_no='1', num_of_rows='2', ver='1.2')['0']['pm10Value'])
-##pm25_grade = get_grade_pm25(pm25_val)
-##pm10_grade = get_grade_pm10(pm10_val)
+
+# Get the concetration of PM10, PM2.5 and grade
+# 1 : Best -> 4 : Worst
+pm25_val = int(pollution_dat.station("영등포로", "DAILY", page_no='1', num_of_rows='2', ver='1.2')['0']['pm25Value']) ## '0' : latest data
+pm10_val = int(pollution_dat.station("영등포로", "DAILY", page_no='1', num_of_rows='2', ver='1.2')['0']['pm10Value'])
+pm25_grade = get_grade_pm25(pm25_val)
+pm10_grade = get_grade_pm10(pm10_val)
 
 ## debug
 #-print("현재 미세먼지 농도는 %d 이고, 등급은 %d 입니다." %(pm10_val, pm10_grade))
 #-print("현재 초미세먼지 농도는 %d 이고, 등급은 %d 입니다." %(pm25_val, pm25_grade))
 
-get_near_station()
